@@ -23,6 +23,7 @@ var _readFileAssets = RNFSManager.readFileAssets ? Promise.promisify(RNFSManager
 var _copyFileAssets = RNFSManager.copyFileAssets ? Promise.promisify(RNFSManager.copyFileAssets) : undefined;
 var _writeFile = Promise.promisify(RNFSManager.writeFile);
 var _moveFile = Promise.promisify(RNFSManager.moveFile);
+var _copyFile = Promise.promisify(RNFSManager.copyFile);
 var _unlink = Promise.promisify(RNFSManager.unlink);
 var _mkdir = Promise.promisify(RNFSManager.mkdir);
 var _downloadFile = Promise.promisify(RNFSManager.downloadFile);
@@ -173,6 +174,11 @@ var RNFS = {
   moveFile(filepath, destPath) {
     return _moveFile(filepath, destPath)
       .catch(convertError);
+  },
+
+  copyFile(filepath, destPath) {
+    return _copyFile(filepath, destPath)
+        .catch(convertError);
   },
 
   pathForBundle(bundleName) {

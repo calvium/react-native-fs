@@ -225,6 +225,16 @@ Reads the file at `path` in the Android app's assets folder and return contents.
 
 Note: Android only.
 
+### `promise copyFile(source, destination)`
+
+Copies the file at `source` in the file system and copies it to the given `destination` path.
+
+`source` (`String`) is the absolute path to the source file.
+
+`destination` (`String`) is the absolute path to the destination including the filename. 
+
+NOTE: On Android copyFile will always overwrite the destination. On iOS an error will be thrown if the file already exists.
+
 ### `promise copyFileAssets(source, destination)`
 
 Copies the file at `source` in the Android app's assets folder and copies it to the given `destination` path.
@@ -233,7 +243,7 @@ Copies the file at `source` in the Android app's assets folder and copies it to 
 
 `destination` (`String`) is the absolute path to the destination including the filename. 
 
-Note: Android only.
+Note: Android only. Will overwrite the file if it's already there.
 
 ### `promise writeFile(filepath, contents [, encoding, options])`
 

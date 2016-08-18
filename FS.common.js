@@ -21,6 +21,7 @@ var _stat = Promise.promisify(RNFSManager.stat);
 var _readFile = Promise.promisify(RNFSManager.readFile);
 var _readFileAssets = RNFSManager.readFileAssets ? Promise.promisify(RNFSManager.readFileAssets) : undefined;
 var _copyFileAssets = RNFSManager.copyFileAssets ? Promise.promisify(RNFSManager.copyFileAssets) : undefined;
+var _existsAssets = RNFSManager.existsAssets ? Promise.promisify(RNFSManager.existsAssets) : undefined;
 var _writeFile = Promise.promisify(RNFSManager.writeFile);
 var _moveFile = Promise.promisify(RNFSManager.moveFile);
 var _copyFile = Promise.promisify(RNFSManager.copyFile);
@@ -106,6 +107,12 @@ var RNFS = {
     return readDirActual(dirpath, _readDirAssets);
   },
 
+  // Android-only
+  existsAssets(filepath) {
+    return _existsAssets(filepath)
+      .catch(convertError);
+  },
+
   // Node style version (lowercase d). Returns just the names
   readdir(dirpath) {
     return RNFS.readDir(dirpath)
@@ -128,7 +135,7 @@ var RNFS = {
       })
       .catch(convertError);
   },
-  
+
   exists(filepath) {
     return _exists(filepath)
       .catch(convertError);
